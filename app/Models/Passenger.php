@@ -10,7 +10,7 @@ class Passenger extends Model
     use HasFactory;
     protected $table = 'passengers';
 
-    protected $fillable = [
+    protected $guarded = [
         'first_name',
         'last_name',
         'email',
