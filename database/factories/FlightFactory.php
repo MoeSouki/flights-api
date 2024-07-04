@@ -20,10 +20,8 @@ class FlightFactory extends Factory
             'number' => $this->faker->regexify('[A-Z]{2}[0-9]{3}'),
             'departure_city' => $this->faker->city(),
             'arrival_city' => $this->faker->city(),
-            'departure_time' => $this->faker->time(),
-            'departure_date' => $this->faker->date(),
-            'arrival_time' => $this->faker->time(),
-            'arrival_date' => $this->faker->date(),
+            'departure_time' => $this->faker->dateTime(),
+            'arrival_time' => $this->faker->dateTime(),
         ];
     }
 }

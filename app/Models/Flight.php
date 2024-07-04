@@ -15,8 +15,6 @@ class Flight extends Model
         'departure_city',
         'arrival_city',
         'departure_time',
-        'departure_date',
         'arrival_time',
-        'arrival_date'
     ];
 }
