@@ -16,7 +16,8 @@ class FlightFactory extends Factory
      */
     public function definition(): array
     {
-        $departureTime = now();
+        $departureTime = $this->faker->dateTimeBetween(now(), '+1 month');
+
 
         return [
             'number' => $this->faker->regexify('[A-Z]{2}[0-9]{3}'),
