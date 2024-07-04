@@ -18,9 +18,12 @@ class FlightSeeder extends Seeder
 
         $passengers = Passenger::all();
 
-        $passengers->each(function ($passenger) use ($flights) {
-            $flight = $flights->random();
-            $passenger->flights()->attach($flight);
-        });
+        foreach ($passengers as $passenger) {
+            $numFlights = rand(1, 3);
+
+            $selectedFlights = $flights->random($numFlights);
+
+            $passenger->flights()->attach($selectedFlights);
+        }
     }
 }
