@@ -21,8 +21,9 @@ class FlightFactory extends Factory
             'departure_city' => $this->faker->city(),
             'arrival_city' => $this->faker->city(),
             'departure_time' => $this->faker->time(),
+            'departure_date' => $this->faker->date(),
             'arrival_time' => $this->faker->time(),
-
+            'arrival_date' => $this->faker->date(),
         ];
     }
 }
