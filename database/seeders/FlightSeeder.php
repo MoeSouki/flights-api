@@ -12,11 +12,15 @@ class FlightSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        Flight::factory()->count(50)->create()->each(function ($flight) {
-            $passengerIds = Passenger::inRandomOrder()->limit(rand(1, 10))->pluck('id');
-            $flight->passengers()->attach($passengerIds);
+        $flights = Flight::factory()->count(50)->create();
+
+        $passengers = Passenger::all();
+
+        $passengers->each(function ($passenger) use ($flights) {
+            $flight = $flights->random();
+            $passenger->flights()->attach($flight);
         });
     }
 }
