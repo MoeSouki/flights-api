@@ -19,6 +19,8 @@ class Passenger extends Model
         'date_of_birth',
         'passport_expiry_date',
     ];
-    // a type of security vulnerability that occurs when an application code allows user-provided
-    // data to be used to set properties on an object without verifying that the user has the right to do so.
+    public function flights()
+    {
+        return $this->belongsToMany(Flight::class);
+    }
 }

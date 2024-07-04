@@ -17,4 +17,9 @@ class Flight extends Model
         'departure_time',
         'arrival_time',
     ];
+
+    public function passengers()
+    {
+        return $this->belongsToMany(Passenger::class);
+    }
 }
