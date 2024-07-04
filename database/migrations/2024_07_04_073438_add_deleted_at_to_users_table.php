@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('passengers', function (Blueprint $table) {
-            $table->softDeletes(); // adds a deleted_at column to the db
+        Schema::table('users', function (Blueprint $table) {
+            $table->softDeletes(); // adds the deleted_at column
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('passengers', function (Blueprint $table) {
-            $table->dropSoftDeletes();// drops the deleted_at column
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropSoftDeletes(); //drops the deleted_at column
         });
     }
 };

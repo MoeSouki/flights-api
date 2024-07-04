@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Passenger extends Model
 {
-    use HasFactory, SoftDeletes; // soft deletes allows you to mark records as deleted without actually removing them from the database.
+    use HasFactory;
     protected $table = 'passengers';
 
     protected $guarded = [
