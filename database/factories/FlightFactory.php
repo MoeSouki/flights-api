@@ -16,12 +16,14 @@ class FlightFactory extends Factory
      */
     public function definition(): array
     {
+        $departureTime = $this->faker->dateTimeThisMonth();
+
         return [
             'number' => $this->faker->regexify('[A-Z]{2}[0-9]{3}'),
             'departure_city' => $this->faker->city(),
             'arrival_city' => $this->faker->city(),
-            'departure_time' => $this->faker->dateTime(),
-            'arrival_time' => $this->faker->dateTime(),
+            'departure_time' => $departureTime,
+            'arrival_time' => $this->faker->dateTimeInInterval($departureTime, '+7 days'),
         ];
     }
 }
