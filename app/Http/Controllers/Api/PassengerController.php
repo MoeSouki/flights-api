@@ -13,6 +13,7 @@ class PassengerController extends Controller
     public function index()
     {
         $passengers = QueryBuilder::for(Passenger::class)
+            ->with('flights')
             ->defaultSort('-updated_at')
             ->allowedFilters([AllowedFilter::exact('id'), 'first_name', 'last_name', 'email', 'date_of_birth', 'passport_expiry_date'])
             ->allowedSorts(['id', 'first_name', 'last_name', 'email', 'date_of_birth', 'passport_expiry_date'])

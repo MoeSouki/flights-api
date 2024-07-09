@@ -12,6 +12,7 @@ class FlightController extends Controller
     public function index()
     {
         $flights = QueryBuilder::for(Flight::class)
+            ->with('passengers')
             ->defaultSort('-updated_at')
             ->allowedFilters([AllowedFilter::exact('id'), 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
             ->allowedSorts(['id', 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
@@ -21,9 +22,8 @@ class FlightController extends Controller
         return response()->json($flights);
 
     }
-    public function show($flightId)
+    public function show(Flight $flight)
     {
-        return response()->json(Flight::with('passengers')->findOrFail($flightId));
-
+        return response()->json($flight->load('passengers'));
     }
 }
