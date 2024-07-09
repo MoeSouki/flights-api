@@ -20,4 +20,9 @@ class FlightsController extends Controller
         return response()->json($flights);
 
     }
+    public function show(Flight $flight)
+    {
+        return response()->json($flight->passengers()->get());
+
+    }
 }
