@@ -12,6 +12,7 @@ class FlightsController extends Controller
     public function index()
     {
         $flights = QueryBuilder::for(Flight::class)
+            ->defaultSort('-id')
             ->allowedFilters([AllowedFilter::exact('id'), 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
             ->allowedSorts(['id', 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
             ->paginate(100);
