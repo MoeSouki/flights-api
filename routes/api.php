@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FlightController;
-use App\Http\Controllers\Api\PassengersController;
 use App\Http\Controllers\FlightsController;
+use App\Http\Controllers\Api\PassengersController;
+use App\Http\Controllers\FlightPassengersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/passengers', [PassengersController::class, 'index']);
 Route::get('/flights', [FlightsController::class, 'index']);
+Route::get('/flights/{flight}/passengers', [FlightPassengersController::class, 'index']);
