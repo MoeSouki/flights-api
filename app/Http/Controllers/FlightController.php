@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-class FlightsController extends Controller
+class FlightController extends Controller
 {
     public function index()
     {
         $flights = QueryBuilder::for(Flight::class)
-            ->defaultSort('-id')
+            ->defaultSort('-updated_at')
             ->allowedFilters([AllowedFilter::exact('id'), 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
             ->allowedSorts(['id', 'number', 'departure_city', 'arrival_city', 'departure_time', 'arrival_time'])
             ->paginate(100);
@@ -21,9 +21,9 @@ class FlightsController extends Controller
         return response()->json($flights);
 
     }
-    public function show(Flight $flight)
+    public function show($flightId)
     {
-        return response()->json($flight->passengers()->get());
+        return response()->json(Flight::with('passengers')->findOrFail($flightId));
 
     }
 }
