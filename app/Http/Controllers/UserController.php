@@ -46,16 +46,11 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        if ($request->has('name')) {
-            $user->name = $request->input('name', $user->name);
-        }
-        if ($request->has('email')) {
-            $user->email = $request->input('email', $user->email);
-        }
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
-        $user->save();
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
 
         return response()->json($user, 200);
     }
