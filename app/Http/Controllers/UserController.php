@@ -14,6 +14,12 @@ class UserController extends Controller
         return response()->json($users);
     }
 
+    public function show(User $user)
+    {
+        return response()->json($user, 200);
+
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -35,9 +41,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validationData = $request->validate([
-            'name' => 'string|max:255',
-            'email' => 'unique:users,email,',
-            'password' => 'string|min:6'
+            'name' => 'required|string|max:255',
+            'email' => 'required|unique:users,email,',
+            'password' => 'required|string|min:6'
         ]);
 
         if ($request->has('name')) {
