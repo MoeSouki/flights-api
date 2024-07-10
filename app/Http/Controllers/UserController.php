@@ -46,11 +46,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $user->update($validationData);
 
         return response()->json($user, 200);
     }
