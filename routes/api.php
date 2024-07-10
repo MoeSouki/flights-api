@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\Api\PassengerController;
+use App\Http\Controllers\UserAuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('passengers', PassengerController::class);
 Route::resource('flights', FlightController::class);
 Route::resource('users', UserController::class);
+
+Route::post('/register', [UserAuthenticationController::class, 'register']);
+Route::post('/login', [UserAuthenticationController::class, 'login']);
+Route::post('/logout', [UserAuthenticationController::class, 'logout'])
+    ->middleware('auth:sanctum');
