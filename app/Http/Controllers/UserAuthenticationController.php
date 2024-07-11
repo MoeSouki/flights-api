@@ -14,7 +14,7 @@ class UserAuthenticationController extends Controller
         $registerUserData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
         ]);
 
         $user = User::create([
@@ -50,10 +50,9 @@ class UserAuthenticationController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
-
+        $request->user()->currentAccessToken()->delete();
         return response()->json([
             "message" => "Logged out successfully"
         ]);

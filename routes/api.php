@@ -22,11 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('passengers', PassengerController::class);
-Route::resource('flights', FlightController::class);
-Route::resource('users', UserController::class);
-
 Route::post('/register', [UserAuthenticationController::class, 'register']);
 Route::post('/login', [UserAuthenticationController::class, 'login']);
 Route::post('/logout', [UserAuthenticationController::class, 'logout'])
     ->middleware('auth:sanctum');
+
+
+Route::resource('users', UserController::class);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::resource('flights', FlightController::class);
+    Route::resource('passengers', PassengerController::class);
+});
