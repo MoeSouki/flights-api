@@ -23,6 +23,9 @@ class UserAuthenticationController extends Controller
             'password' => Hash::make($registerUserData['password']),
         ]);
 
+        $user->assignRole('user');
+
+
         return response()->json([
             'message' => 'User created successfully',
         ]);

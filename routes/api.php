@@ -24,13 +24,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [UserAuthenticationController::class, 'register']);
 Route::post('/login', [UserAuthenticationController::class, 'login']);
-Route::post('/logout', [UserAuthenticationController::class, 'logout'])
-    ->middleware('auth:sanctum');
-
+Route::post('/logout', [UserAuthenticationController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::resource('users', UserController::class);
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('flights', FlightController::class);
+
+// Routes for admin
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::resource('passengers', PassengerController::class);
+    Route::resource('flights', FlightController::class)->except(['index', 'show']);
+});
+
+// Routes for user
+Route::middleware(['auth:sanctum', 'role:user|admin'])->group(function () {
+    Route::get('flights', [FlightController::class, 'index']);
+    Route::get('flights/{flight}', [FlightController::class, 'show']);
 });
