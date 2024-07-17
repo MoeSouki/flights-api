@@ -27,6 +27,7 @@ Route::post('/login', [UserAuthenticationController::class, 'login']);
 Route::post('/logout', [UserAuthenticationController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::resource('users', UserController::class);
+Route::get('/export', [UserController::class, 'exportUsers']);
 
 
 // Routes for admin
